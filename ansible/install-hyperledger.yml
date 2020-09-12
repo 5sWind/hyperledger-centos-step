@@ -3,6 +3,12 @@
   hosts: k8s
   remote_user: root
   tasks:
+  - name: Download tools
+    get_url:
+      url: https://gh.api.99988866.xyz/github.com/hyperledger/fabric/releases/download/v2.2.0/hyperledger-fabric-linux-amd64-2.2.0.tar.gz
+      dest: /home
+      mode: '0440'
+
   - name: Extract TAR
     unarchive:
       src: /home/hyperledger-fabric-linux-amd64-2.2.0.tar.gz
@@ -13,15 +19,16 @@
 
   - name: Check have successfully installed
     command: configtxgen --version
+ 
+  - name: Install Git
+    yum:
+      name: git
+      state: latest
 
-  - name: Git clone
-    command: git clone https://gh.api.99988866.xyz/github.com/WhiteMatrixTech/fabric-external-chaincodes.git
-
-  - name: Change permissions
-    shell: cd /fabric-external-chaincodes && chmod 744 ./fabricOps.sh
-
-  - name: Start Fabric
-    command: ./fabricOps.sh start
-
-  - name: Create storage
-    command: mkdir /home/storage
+  - name: Configure Fabric
+    shell: |
+      cd /home
+      git clone https://gh.api.99988866.xyz/github.com/WhiteMatrixTech/fabric-external-chaincodes.git
+      cd fabric-external-chaincodes
+      chmod 744 ./fabricOps.sh
+      ./fabricOps.sh start
