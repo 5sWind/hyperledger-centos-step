@@ -14,8 +14,11 @@
   - name: Check have successfully installed
     command: configtxgen --version
 
+  - name: Git clone
+    command: git clone https://gh.api.99988866.xyz/github.com/WhiteMatrixTech/fabric-external-chaincodes.git
+
   - name: Change permissions
-    shell: cd /home && chmod 744 ./fabricOps.sh
+    shell: cd /fabric-external-chaincodes && chmod 744 ./fabricOps.sh
 
   - name: Start Fabric
     command: ./fabricOps.sh start
