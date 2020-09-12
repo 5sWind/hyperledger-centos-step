@@ -7,12 +7,13 @@
     get_url:
       url: https://gh.api.99988866.xyz/github.com/hyperledger/fabric/releases/download/v2.2.0/hyperledger-fabric-linux-amd64-2.2.0.tar.gz
       dest: /home
-      mode: '0440'
+      mode: '0644'
 
   - name: Extract TAR
     unarchive:
       src: /home/hyperledger-fabric-linux-amd64-2.2.0.tar.gz
       dest: /home
+      remote_src: yes
 
   - name: Install binary
     shell: cd /home && mv bin/* /bin
@@ -29,6 +30,7 @@
     shell: |
       cd /home
       git clone https://gh.api.99988866.xyz/github.com/WhiteMatrixTech/fabric-external-chaincodes.git
+      mkdir storage
       cd fabric-external-chaincodes
       chmod 744 ./fabricOps.sh
       ./fabricOps.sh start
