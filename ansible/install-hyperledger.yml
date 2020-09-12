@@ -1,0 +1,24 @@
+---
+- name: Prepare installation of Fabric
+  hosts: k8s
+  remote_user: root
+  tasks:
+  - name: Extract TAR
+    unarchive:
+      src: /home/hyperledger-fabric-linux-amd64-2.2.0.tar.gz
+      dest: /home
+
+  - name: Install binary
+    shell: cd /home && mv bin/* /bin
+
+  - name: Check have successfully installed
+    command: configtxgen --version
+
+  - name: Change permissions
+    shell: cd /home && chmod 744 ./fabricOps.sh
+
+  - name: Start Fabric
+    command: ./fabricOps.sh start
+
+  - name: Create storage
+    command: mkdir /home/storage
