@@ -1,28 +1,20 @@
 ---
-- name: Bootstrap Fabric config on the worker
-  hosts: worker1
-  remote_user: root
-  tasks:
-    - name: Bootstrap config
-    - shell: |
-        cd fabric-external-chaincodes
-        chmod 744 ./fabricOps.sh
-        ./fabricOps.sh
-
 - name: Copy config to other workers
-  hosts: worker2
+  hosts: k8s
   remote_user: root
   tasks:
     - name: Copy channel-artifacts to other workers
-    - synchronize:
+      copy:
         src: /home/fabric-external-chaincodes/channel-artifacts
-        dest: /home/fabric-external-chaincodes
-        rsync_opts: '-e "ssh -p -i /root/.ssh/id_rsa"'
-      delegate_to: worker1
+        dest: /home/fabric-external-chaincodes/
+        owner: root
+        group: root
+        mode: '0644'
 
     - name: Copy crypto-config to other workers
-    - synchronize:
+      copy:
         src: /home/fabric-external-chaincodes/crypto-config
-        dest: /home/fabric-external-chaincodes
-        rsync_opts: '-e "ssh -p -i /root/.ssh/id_rsa"'
-      delegate_to: worker1
+        dest: /home/fabric-external-chaincodes/
+        owner: root
+        group: root
+        mode: '0644'
