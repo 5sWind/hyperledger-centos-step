@@ -31,6 +31,3 @@
       cd /home
       git clone https://gh.api.99988866.xyz/github.com/WhiteMatrixTech/fabric-external-chaincodes.git
       mkdir storage
-      cd fabric-external-chaincodes
-      chmod 744 ./fabricOps.sh
-      ./fabricOps.sh start
