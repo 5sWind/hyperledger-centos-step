@@ -3,31 +3,31 @@
   hosts: k8s
   remote_user: root
   tasks:
-  - name: Download tools
-    get_url:
-      url: https://gh.api.99988866.xyz/github.com/hyperledger/fabric/releases/download/v2.2.0/hyperledger-fabric-linux-amd64-2.2.0.tar.gz
-      dest: /home
-      mode: '0644'
+    - name: Download tools
+      get_url:
+        url: https://gh.api.99988866.xyz/github.com/hyperledger/fabric/releases/download/v2.2.0/hyperledger-fabric-linux-amd64-2.2.0.tar.gz
+        dest: /home
+        mode: "0644"
 
-  - name: Extract TAR
-    unarchive:
-      src: /home/hyperledger-fabric-linux-amd64-2.2.0.tar.gz
-      dest: /home
-      remote_src: yes
+    - name: Extract TAR
+      unarchive:
+        src: /home/hyperledger-fabric-linux-amd64-2.2.0.tar.gz
+        dest: /home
+        remote_src: yes
 
-  - name: Install binary
-    shell: cd /home && mv bin/* /bin
+    - name: Install binary
+      shell: cd /home && mv bin/* /bin
 
-  - name: Check have successfully installed
-    command: configtxgen --version
- 
-  - name: Install Git
-    yum:
-      name: git
-      state: latest
+    - name: Check have successfully installed
+      command: configtxgen --version
 
-  - name: Configure Fabric
-    shell: |
-      cd /home
-      git clone https://gh.api.99988866.xyz/github.com/WhiteMatrixTech/fabric-external-chaincodes.git
-      mkdir storage
+    - name: Install Git
+      yum:
+        name: git
+        state: latest
+
+    - name: Configure Fabric
+      shell: |
+        cd /home
+        git clone https://gh.api.99988866.xyz/github.com/WhiteMatrixTech/fabric-external-chaincodes.git
+        mkdir storage
