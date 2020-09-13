@@ -60,6 +60,11 @@ cd /home/fabric-external-chaincodes && kubectl create -f orderer-service/ && kub
 kubectl exec -it cli_org1_pod_name -n hyperledger -- sh
 ```
 
+### 创建channel
+```
+peer channel create -o orderer0:7050 -c mychannel -f ./scripts/channel-artifacts/channel.tx --tls true --cafile $ORDERER_CA
+```
+
 ### 加入channel
 ```
 peer channel join -b mychannel.block
