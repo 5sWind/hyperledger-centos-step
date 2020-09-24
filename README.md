@@ -51,7 +51,7 @@ cd hyperledger-centos-step/ansible && ansible-playbook fabric-bootstrap.yml
 ## bootstrap hyperledger fabric on master node
 ```
 kubectl create ns hyperledger
-cd /home/fabric-external-chaincodes && kubectl create -f orderer-service/ && kubectl create -f org1/ && kubectl create -f org2/ && kubectl get pods -n hyperledger
+cd /home/fabric-external-chaincodes && kubectl create -f orderer-service/ && kubectl create -f org1/ && kubectl create -f org2/ && kubectl create -f ingress/ && kubectl get pods -n hyperledger
 ```
 
 ## 容器操作
