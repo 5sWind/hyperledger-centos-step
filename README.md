@@ -60,7 +60,7 @@ kubectl delete ns hyperledger
 
 # this is to remove orderer and peer related files
 # on worker node.
-rm -rf /home/storage
+rm -rf /home/storage/*
 ```
 
 ## 容器操作
