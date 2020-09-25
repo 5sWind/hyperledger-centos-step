@@ -54,6 +54,15 @@ kubectl create ns hyperledger
 cd /home/fabric-external-chaincodes && kubectl create -f orderer-service/ && kubectl create -f org1/ && kubectl create -f org2/ && kubectl create -f ingress/ && kubectl get pods -n hyperledger
 ```
 
+## clean up
+```
+kubectl delete ns hyperledger
+
+# this is to remove orderer and peer related files
+# on worker node.
+rm -rf /home/storage
+```
+
 ## 容器操作
 ### 进入容器
 ```
